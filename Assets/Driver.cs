@@ -19,10 +19,23 @@ public class Driver : MonoBehaviour
 
     void Start() { }
 
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Booster")
+        {
+            moveSpeed = boostSpeed;
+        }
+        else if (other.tag == "Bump")
+        {
+            moveSpeed = slowSpeed;
+        }
+    }
+
     void Update()
     {
         float steerAmount = Input.GetAxis("Horizontal") * steerSpeed * Time.deltaTime;
         float moveAmount = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
+
         transform.Rotate(0, 0, -steerAmount);
         transform.Translate(0, moveAmount, 0);
     }
